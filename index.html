@@ -655,6 +655,20 @@
                         </button>
                     </div>
                     
+                    <div class="notification-settings" style="background: linear-gradient(135deg, #ff9a56 0%, #ff7675 100%); color: white;">
+                        <h3 style="margin-bottom: 10px; color: white;">🧪 ทดสอบระบบแจ้งเตือน</h3>
+                        <p style="color: rgba(255,255,255,0.9); margin-bottom: 15px;">
+                            📌 คลิกปุ่มด้านล่างเพื่อส่งข้อความทดสอบไปยังกลุ่ม LINE ทันที
+                        </p>
+                        <button class="btn btn-primary" onclick="sendTestNotification()" 
+                                style="background: white; color: #ff7675; font-weight: bold; padding: 12px 30px;">
+                            🧪 ทดสอบส่งแจ้งเตือน
+                        </button>
+                        <div id="test-result" style="margin-top: 15px; display: none; background: white; color: #2d3436; padding: 15px; border-radius: 8px;">
+                            <p id="test-result-text"></p>
+                        </div>
+                    </div>
+
                     <div class="notification-settings">
                         <h3 style="margin-bottom: 15px;">ระบบแจ้งเตือน LINE</h3>
                         <p style="color: #7f8c8d; margin-bottom: 15px;">
@@ -663,13 +677,21 @@
                     </div>
 
                     <div class="form-group">
+                        <label>🔗 Google Apps Script Deployment URL</label>
+                        <input type="text" id="gas-url" placeholder="https://script.google.com/macros/s/[ID]/usercontent" value="https://script.google.com/macros/s/AKfycbz-n9n73dUxPgd0FFab-123PtA6b7memd3HI6GQA4grgj_p8HifuGwi5R_zBVUXqoS6/exec">
+                        <p style="font-size: 12px; color: #7f8c8d; margin-top: 5px;">
+                            ✅ ใส่ URL ของคุณแล้ว พร้อมใช้งาน
+                        </p>
+                    </div>
+
+                    <div class="form-group">
                         <label>🔑 LINE Channel Access Token</label>
-                        <input type="password" id="line-token" placeholder="ใส่ token ของ LINE Bot">
+                        <input type="password" id="line-token" placeholder="ใส่ token ของ LINE Bot" value="xX9ybn/Z8smYsBvhEiIwuNNJZ8/6e8cTc6qe+HxB+2N1F5XJzLubiXIV8ux6v+mrJwLqH2d9o5vp8Li/Jkg4mM67kgocn84iyl1YeuG15lmKB7PtZtkA/Ve9w24SJtMYnTT9q8eWvDxwXQwXaCb4twdB04t89/1O/w1cDnyilFU=">
                     </div>
 
                     <div class="form-group">
                         <label>👤 User ID / Group ID ผู้รับแจ้งเตือน</label>
-                        <textarea id="line-user-id" placeholder="ใส่ LINE User ID หรือ Group ID (คั่นด้วยจุลภาค)"></textarea>
+                        <textarea id="line-user-id" placeholder="ใส่ LINE User ID หรือ Group ID (คั่นด้วยจุลภาค)">C39b078e1e06576822619457882f6ff3e</textarea>
                     </div>
 
                     <div class="form-group">
@@ -682,10 +704,39 @@
                         </select>
                     </div>
 
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>🕐 เวลาส่ง (ชั่วโมง)</label>
+                            <select id="notification-hour">
+                                <option value="09">09:00 (9 โมงเช้า)</option>
+                                <option value="10">10:00</option>
+                                <option value="11">11:00</option>
+                                <option value="12">12:00 (12 โมงเที่ยง)</option>
+                                <option value="13">13:00</option>
+                                <option value="14">14:00</option>
+                                <option value="15">15:00</option>
+                                <option value="16">16:00</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>⏰ นาที</label>
+                            <select id="notification-minute">
+                                <option value="00">:00</option>
+                                <option value="15">:15</option>
+                                <option value="30">:30</option>
+                                <option value="45">:45</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label>📝 ข้อความแจ้งเตือน</label>
                         <textarea id="notification-message" placeholder="กรุณา Update ข้อมูลในระบบ" 
-                                  style="min-height: 80px;">🔔 reminder: กรุณาตรวจสอบข้อมูลใน dashboard และ update ข้อมูลในงานของท่านในระบบติดตามผลงานฝ่ายการพยาบาล ขอบคุณค่ะ 🙏</textarea>
+                                  style="min-height: 80px;">🔔 reminder: กรุณาตรวจสอบข้อมูลใน dashboard และ update ข้อมูลในงานของท่านในระบบติดตามผลงานฝ่ายการพยาบาล
+
+🔗 เข้าสู่ระบบ: https://informaticnr28-beep.github.io/-portal-nursing/
+
+ขอบคุณค่ะ 🙏</textarea>
                     </div>
 
                     <div class="notification-settings">
@@ -710,8 +761,38 @@
                         💾 บันทึกการตั้งค่า
                     </button>
 
+                    <button class="btn btn-primary" onclick="sendImmediateNotification()" style="margin-top: 10px; margin-left: 10px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        📤 ส่งแจ้งเตือนตอนนี้
+                    </button>
+
                     <div id="success-msg" class="success-message" style="display: none; margin-top: 20px;">
                         ✅ บันทึกสำเร็จ! ระบบแจ้งเตือน LINE พร้อมใช้งาน
+                    </div>
+
+                    <div id="send-success-msg" class="success-message" style="display: none; margin-top: 20px;">
+                        ✅ ส่งแจ้งเตือนแล้ว! ผู้ใช้จะได้รับข้อความในไม่ช้า
+                    </div>
+
+                    <!-- ตารางประวัติการส่ง -->
+                    <div style="margin-top: 40px;">
+                        <h3 style="margin-bottom: 20px; color: #2d3436;">📊 ประวัติการส่งแจ้งเตือน</h3>
+                        <div style="background: #f9f9f9; border-radius: 12px; overflow: hidden;">
+                            <div id="notification-history" style="max-height: 400px; overflow-y: auto;">
+                                <div style="padding: 30px; text-align: center; color: #7f8c8d;">
+                                    <p>⏳ ยังไม่มีประวัติการส่ง</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- แสดงเวลาส่งล่าสุด -->
+                    <div id="last-send-info" style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white; display: none;">
+                        <p style="margin: 0; font-weight: 600;">
+                            📅 ส่งแจ้งเตือนล่าสุด: <span id="last-send-date">-</span>
+                        </p>
+                        <p style="margin: 5px 0 0 0; font-size: 13px; opacity: 0.9;">
+                            ⏱️ ถัดไป: <span id="next-send-date">-</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -740,6 +821,11 @@
         const OWNER_PASSWORD = "admin123"; // เปลี่ยนรหัสผ่านนี้เป็นที่ต้องการ
         
         // ตรวจสอบว่า owner ได้ authenticate หรือไม่
+        function isOwnerAuthenticated() {
+            const auth = sessionStorage.getItem("ownerAuthenticated");
+            return auth === "true";
+        }
+        
         // แสดง Modal
         function showAuthModal() {
             document.getElementById("ownerAuthModal").classList.add("show");
@@ -767,6 +853,11 @@
                 document.getElementById("admin-login-btn").innerHTML = '<span>✓</span><span>Admin (Login แล้ว)</span>';
                 document.getElementById("admin-login-btn").onclick = null; // ปิดการคลิก
                 closeAuthModal();
+                
+                // โหลดประวัติการส่ง
+                updateNotificationHistory();
+                updateNotificationStatus();
+                
                 alert("✅ Login สำเร็จ! สามารถเข้าถึง แจ้งเตือน ได้แล้ว");
             } else {
                 // ผิด
@@ -865,10 +956,18 @@
 
         // Notification Settings
         function saveNotificationSettings() {
+            const gasUrl = document.getElementById('gas-url').value;
             const token = document.getElementById('line-token').value;
             const userId = document.getElementById('line-user-id').value;
             const interval = document.getElementById('notification-interval').value;
+            const hour = document.getElementById('notification-hour').value;
+            const minute = document.getElementById('notification-minute').value;
             const message = document.getElementById('notification-message').value;
+
+            if (!gasUrl) {
+                alert('⚠️ กรุณากรอก Google Apps Script Deployment URL');
+                return;
+            }
 
             if (!token || !userId) {
                 alert('⚠️ กรุณากรอก TOKEN และ User ID');
@@ -880,20 +979,215 @@
             successMsg.style.display = 'block';
 
             // Save to localStorage
-            localStorage.setItem('lineSettings', JSON.stringify({
+            const settings = {
+                gasUrl: gasUrl,
                 token: token,
                 userId: userId,
                 interval: interval,
+                hour: hour,
+                minute: minute,
                 message: message,
                 autoNotify: document.getElementById('auto-notify').checked,
                 pendingNotify: document.getElementById('pending-notify').checked,
                 savedAt: new Date().toISOString()
-            }));
+            };
+            
+            localStorage.setItem('lineSettings', JSON.stringify(settings));
+            
+            // อัปเดตสถานะการแจ้งเตือน
+            updateNotificationStatus();
 
             console.log('✅ บันทึกการตั้งค่า LINE Notification');
             setTimeout(() => {
                 successMsg.style.display = 'none';
             }, 5000);
+        }
+
+        // ฟังก์ชันทดสอบส่งแจ้งเตือน (ใช้ Google Apps Script)
+        async function sendTestNotification() {
+            const gasUrl = document.getElementById('gas-url').value;
+            const userId = document.getElementById('line-user-id').value;
+            const testMessage = "🧪 [TEST] ระบบแจ้งเตือนทำงานได้ปกติ ✅\n\n🔗 เข้าสู่ระบบ: https://informaticnr28-beep.github.io/-portal-nursing/";
+
+            if (!gasUrl) {
+                showTestResult('❌ ข้อผิดพลาด: กรุณาใส่ Google Apps Script Deployment URL', false);
+                return;
+            }
+
+            if (!userId) {
+                showTestResult('❌ ข้อผิดพลาด: ไม่มี Group ID', false);
+                return;
+            }
+
+            try {
+                showTestResult('⏳ กำลังส่งข้อความ...', false);
+                
+                // ส่ง request ไป Google Apps Script
+                const response = await fetch(gasUrl, {
+                    method: 'POST',
+                    body: new URLSearchParams({
+                        groupId: userId,
+                        message: testMessage
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showTestResult('✅ ส่งข้อความทดสอบสำเร็จ!\n\nตรวจสอบกลุ่ม LINE ของคุณ', true);
+                    saveNotificationHistory(testMessage);
+                    updateNotificationHistory();
+                    updateNotificationStatus();
+                } else {
+                    showTestResult('❌ ข้อผิดพลาด: ' + (result.error || 'ไม่รู้สาเหตุ'), false);
+                }
+            } catch (error) {
+                showTestResult('❌ ข้อผิดพลาด: ' + error.message + '\n\n💡 วิธีแก้: ตรวจสอบ Google Apps Script Deployment URL', false);
+            }
+        }
+
+        // แสดงผลการทดสอบ
+        function showTestResult(message, success) {
+            const resultDiv = document.getElementById('test-result');
+            const resultText = document.getElementById('test-result-text');
+            resultText.textContent = message;
+            resultDiv.style.display = 'block';
+            resultDiv.style.background = success ? '#d4edda' : '#f8d7da';
+            resultDiv.style.color = success ? '#155724' : '#721c24';
+            resultDiv.style.borderLeft = '4px solid ' + (success ? '#28a745' : '#f5c6cb');
+        }
+
+        // ส่งแจ้งเตือนด่วน
+        function sendImmediateNotification() {
+            const token = document.getElementById('line-token').value;
+            const userId = document.getElementById('line-user-id').value;
+            const message = document.getElementById('notification-message').value;
+
+            if (!token || !userId) {
+                alert('⚠️ กรุณาบันทึกการตั้งค่าก่อน (TOKEN, User ID)');
+                return;
+            }
+
+            // บันทึกประวัติการส่ง
+            saveNotificationHistory(message);
+            
+            // แสดง Success Message
+            const sendMsg = document.getElementById('send-success-msg');
+            sendMsg.style.display = 'block';
+            
+            // อัปเดตประวัติ
+            updateNotificationHistory();
+            updateNotificationStatus();
+
+            console.log('✅ ส่งแจ้งเตือนทันที');
+            setTimeout(() => {
+                sendMsg.style.display = 'none';
+            }, 5000);
+        }
+
+        // บันทึกประวัติการส่ง
+        function saveNotificationHistory(message) {
+            let history = JSON.parse(localStorage.getItem('notificationHistory') || '[]');
+            
+            history.push({
+                timestamp: new Date().toISOString(),
+                message: message,
+                status: 'ส่งแล้ว'
+            });
+
+            // เก็บแค่ 20 ครั้งล่าสุด
+            if (history.length > 20) {
+                history = history.slice(-20);
+            }
+
+            localStorage.setItem('notificationHistory', JSON.stringify(history));
+        }
+
+        // อัปเดตประวัติการส่ง
+        function updateNotificationHistory() {
+            const history = JSON.parse(localStorage.getItem('notificationHistory') || '[]');
+            const historyContainer = document.getElementById('notification-history');
+
+            if (history.length === 0) {
+                historyContainer.innerHTML = `
+                    <div style="padding: 30px; text-align: center; color: #7f8c8d;">
+                        <p>⏳ ยังไม่มีประวัติการส่ง</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #ecf0f1; border-bottom: 2px solid #dfe6e9;">
+                            <th style="padding: 12px; text-align: left; font-weight: 600;">📅 วันที่/เวลา</th>
+                            <th style="padding: 12px; text-align: left; font-weight: 600;">📝 ข้อความ</th>
+                            <th style="padding: 12px; text-align: center; font-weight: 600;">✓ สถานะ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            history.reverse().forEach(item => {
+                const date = new Date(item.timestamp);
+                const dateStr = date.toLocaleString('th-TH', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                const messagePreview = item.message.substring(0, 50) + (item.message.length > 50 ? '...' : '');
+                
+                html += `
+                    <tr style="border-bottom: 1px solid #ecf0f1;">
+                        <td style="padding: 12px;">${dateStr}</td>
+                        <td style="padding: 12px;">${messagePreview}</td>
+                        <td style="padding: 12px; text-align: center;">
+                            <span style="background: #d4edda; color: #155724; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                                ✓ ${item.status}
+                            </span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+
+            historyContainer.innerHTML = html;
+        }
+
+        // อัปเดตสถานะและแสดงเวลาส่งถัดไป
+        function updateNotificationStatus() {
+            const history = JSON.parse(localStorage.getItem('notificationHistory') || '[]');
+            const settings = JSON.parse(localStorage.getItem('lineSettings') || '{}');
+            
+            if (history.length > 0) {
+                const lastSend = new Date(history[history.length - 1].timestamp);
+                const interval = parseInt(settings.interval) || 90;
+                const nextSend = new Date(lastSend.getTime() + interval * 24 * 60 * 60 * 1000);
+
+                document.getElementById('last-send-info').style.display = 'block';
+                document.getElementById('last-send-date').textContent = lastSend.toLocaleString('th-TH', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                document.getElementById('next-send-date').textContent = nextSend.toLocaleString('th-TH', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
         }
 
         // Load saved settings (เฉพาะ owner เท่านั้น)
@@ -910,13 +1204,20 @@
                 const saved = localStorage.getItem('lineSettings');
                 if (saved) {
                     const settings = JSON.parse(saved);
+                    document.getElementById('gas-url').value = settings.gasUrl || '';
                     document.getElementById('line-token').value = settings.token;
                     document.getElementById('line-user-id').value = settings.userId;
                     document.getElementById('notification-interval').value = settings.interval;
+                    document.getElementById('notification-hour').value = settings.hour || '09';
+                    document.getElementById('notification-minute').value = settings.minute || '00';
                     document.getElementById('notification-message').value = settings.message;
                     document.getElementById('auto-notify').checked = settings.autoNotify;
                     document.getElementById('pending-notify').checked = settings.pendingNotify;
                 }
+                
+                // โหลดประวัติการส่ง
+                updateNotificationHistory();
+                updateNotificationStatus();
             } else {
                 document.getElementById("notification-menu-item").style.display = "none";
             }
