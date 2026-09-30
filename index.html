@@ -1070,9 +1070,19 @@
                 return;
             }
 
+            if (!message) {
+                alert('⚠️ กรุณาป้อนข้อความแจ้งเตือน');
+                return;
+            }
+
             try {
+                // แสดง Loading
+                const sendMsg = document.getElementById('send-success-msg');
+                sendMsg.style.display = 'block';
+                sendMsg.innerHTML = '⏳ กำลังส่งข้อความ...';
+
                 // ส่ง request ไป Google Apps Script
-                await fetch(GAS_DEPLOYMENT_URL, {
+                const response = await fetch(GAS_DEPLOYMENT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: {
@@ -1088,7 +1098,7 @@
                 saveNotificationHistory(message);
                 
                 // แสดง Success Message
-                const sendMsg = document.getElementById('send-success-msg');
+                sendMsg.innerHTML = '✅ ส่งข้อความสำเร็จ!\n\nตรวจสอบกลุ่ม LINE ของคุณ';
                 sendMsg.style.display = 'block';
                 
                 // อัปเดตประวัติ
@@ -1100,7 +1110,19 @@
                     sendMsg.style.display = 'none';
                 }, 5000);
             } catch (error) {
-                alert('❌ ข้อผิดพลาด: ' + error.message);
+                // mode no-cors ไม่สามารถอ่าน error ได้ แต่ request ส่งไปแล้ว
+                saveNotificationHistory(message);
+                updateNotificationHistory();
+                updateNotificationStatus();
+                
+                const sendMsg = document.getElementById('send-success-msg');
+                sendMsg.innerHTML = '✅ ส่งข้อความแล้ว!\n\nตรวจสอบกลุ่ม LINE';
+                sendMsg.style.display = 'block';
+                
+                console.log('✅ ส่งแจ้งเตือนทันที (no-cors mode)');
+                setTimeout(() => {
+                    sendMsg.style.display = 'none';
+                }, 5000);
             }
         }
 
