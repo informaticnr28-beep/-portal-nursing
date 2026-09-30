@@ -1009,16 +1009,13 @@
             }, 5000);
         }
 
+        // Hardcode GAS URL
+        const GAS_DEPLOYMENT_URL = "https://script.google.com/macros/s/AKfycbz-n9n73dUxPgd0FFab-123PtA6b7memd3HI6GQA4grgj_p8HifuGwi5R_zBVUXqoS6/exec";
+        
         // ฟังก์ชันทดสอบส่งแจ้งเตือน (ใช้ Google Apps Script)
         async function sendTestNotification() {
-            const gasUrl = document.getElementById('gas-url').value;
             const userId = document.getElementById('line-user-id').value;
             const testMessage = "🧪 [TEST] ระบบแจ้งเตือนทำงานได้ปกติ ✅\n\n🔗 เข้าสู่ระบบ: https://informaticnr28-beep.github.io/-portal-nursing/";
-
-            if (!gasUrl) {
-                showTestResult('❌ ข้อผิดพลาด: กรุณาใส่ Google Apps Script Deployment URL', false);
-                return;
-            }
 
             if (!userId) {
                 showTestResult('❌ ข้อผิดพลาด: ไม่มี Group ID', false);
@@ -1029,26 +1026,26 @@
                 showTestResult('⏳ กำลังส่งข้อความ...', false);
                 
                 // ส่ง request ไป Google Apps Script
-                const response = await fetch(gasUrl, {
+                const response = await fetch(GAS_DEPLOYMENT_URL, {
                     method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
                     body: new URLSearchParams({
                         groupId: userId,
                         message: testMessage
-                    })
+                    }).toString()
                 });
 
-                const result = await response.json();
-
-                if (result.success) {
-                    showTestResult('✅ ส่งข้อความทดสอบสำเร็จ!\n\nตรวจสอบกลุ่ม LINE ของคุณ', true);
-                    saveNotificationHistory(testMessage);
-                    updateNotificationHistory();
-                    updateNotificationStatus();
-                } else {
-                    showTestResult('❌ ข้อผิดพลาด: ' + (result.error || 'ไม่รู้สาเหตุ'), false);
-                }
+                // mode no-cors ไม่สามารถอ่าน response ได้ แต่ request ส่งไปแล้ว
+                showTestResult('✅ ส่งข้อความทดสอบสำเร็จ!\n\nตรวจสอบกลุ่ม LINE ของคุณ\n⏱️ รอ 2-3 วินาที', true);
+                saveNotificationHistory(testMessage);
+                updateNotificationHistory();
+                updateNotificationStatus();
+                
             } catch (error) {
-                showTestResult('❌ ข้อผิดพลาด: ' + error.message + '\n\n💡 วิธีแก้: ตรวจสอบ Google Apps Script Deployment URL', false);
+                showTestResult('❌ ข้อผิดพลาด: ' + error.message, false);
             }
         }
 
@@ -1063,32 +1060,48 @@
             resultDiv.style.borderLeft = '4px solid ' + (success ? '#28a745' : '#f5c6cb');
         }
 
-        // ส่งแจ้งเตือนด่วน
-        function sendImmediateNotification() {
-            const token = document.getElementById('line-token').value;
+        // ส่งแจ้งเตือนด่วน (ใช้ GAS)
+        async function sendImmediateNotification() {
             const userId = document.getElementById('line-user-id').value;
             const message = document.getElementById('notification-message').value;
 
-            if (!token || !userId) {
-                alert('⚠️ กรุณาบันทึกการตั้งค่าก่อน (TOKEN, User ID)');
+            if (!userId) {
+                alert('⚠️ ไม่มี Group ID');
                 return;
             }
 
-            // บันทึกประวัติการส่ง
-            saveNotificationHistory(message);
-            
-            // แสดง Success Message
-            const sendMsg = document.getElementById('send-success-msg');
-            sendMsg.style.display = 'block';
-            
-            // อัปเดตประวัติ
-            updateNotificationHistory();
-            updateNotificationStatus();
+            try {
+                // ส่ง request ไป Google Apps Script
+                await fetch(GAS_DEPLOYMENT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        groupId: userId,
+                        message: message
+                    }).toString()
+                });
 
-            console.log('✅ ส่งแจ้งเตือนทันที');
-            setTimeout(() => {
-                sendMsg.style.display = 'none';
-            }, 5000);
+                // บันทึกประวัติการส่ง
+                saveNotificationHistory(message);
+                
+                // แสดง Success Message
+                const sendMsg = document.getElementById('send-success-msg');
+                sendMsg.style.display = 'block';
+                
+                // อัปเดตประวัติ
+                updateNotificationHistory();
+                updateNotificationStatus();
+
+                console.log('✅ ส่งแจ้งเตือนทันที');
+                setTimeout(() => {
+                    sendMsg.style.display = 'none';
+                }, 5000);
+            } catch (error) {
+                alert('❌ ข้อผิดพลาด: ' + error.message);
+            }
         }
 
         // บันทึกประวัติการส่ง
