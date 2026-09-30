@@ -678,20 +678,26 @@
 
                     <div class="form-group">
                         <label>🔗 Google Apps Script Deployment URL</label>
-                        <input type="text" id="gas-url" placeholder="https://script.google.com/macros/s/[ID]/usercontent" value="https://script.google.com/macros/s/AKfycbz-n9n73dUxPgd0FFab-123PtA6b7memd3HI6GQA4grgj_p8HifuGwi5R_zBVUXqoS6/exec">
-                        <p style="font-size: 12px; color: #7f8c8d; margin-top: 5px;">
-                            ✅ ใส่ URL ของคุณแล้ว พร้อมใช้งาน
+                        <input type="text" id="gas-url" placeholder="https://script.google.com/macros/s/[ID]/usercontent" value="https://script.google.com/macros/s/AKfycbz-n9n73dUxPgd0FFab-123PtA6b7memd3HI6GQA4grgj_p8HifuGwi5R_zBVUXqoS6/exec" readonly style="background: #f0f0f0; cursor: not-allowed;">
+                        <p style="font-size: 12px; color: #28a745; margin-top: 5px; font-weight: 600;">
+                            ✅ URL ใส่เรียบร้อยแล้ว (ค่าคงที่)
                         </p>
                     </div>
 
                     <div class="form-group">
                         <label>🔑 LINE Channel Access Token</label>
-                        <input type="password" id="line-token" placeholder="ใส่ token ของ LINE Bot" value="xX9ybn/Z8smYsBvhEiIwuNNJZ8/6e8cTc6qe+HxB+2N1F5XJzLubiXIV8ux6v+mrJwLqH2d9o5vp8Li/Jkg4mM67kgocn84iyl1YeuG15lmKB7PtZtkA/Ve9w24SJtMYnTT9q8eWvDxwXQwXaCb4twdB04t89/1O/w1cDnyilFU=">
+                        <input type="password" id="line-token" placeholder="ใส่ token ของ LINE Bot" value="xX9ybn/Z8smYsBvhEiIwuNNJZ8/6e8cTc6qe+HxB+2N1F5XJzLubiXIV8ux6v+mrJwLqH2d9o5vp8Li/Jkg4mM67kgocn84iyl1YeuG15lmKB7PtZtkA/Ve9w24SJtMYnTT9q8eWvDxwXQwXaCb4twdB04t89/1O/w1cDnyilFU=" readonly style="background: #f0f0f0; cursor: not-allowed;">
+                        <p style="font-size: 12px; color: #28a745; margin-top: 5px; font-weight: 600;">
+                            ✅ TOKEN ใส่เรียบร้อยแล้ว (ค่าคงที่)
+                        </p>
                     </div>
 
                     <div class="form-group">
                         <label>👤 User ID / Group ID ผู้รับแจ้งเตือน</label>
-                        <textarea id="line-user-id" placeholder="ใส่ LINE User ID หรือ Group ID (คั่นด้วยจุลภาค)">C39b078e1e06576822619457882f6ff3e</textarea>
+                        <textarea id="line-user-id" placeholder="ใส่ LINE User ID หรือ Group ID (คั่นด้วยจุลภาค)" readonly style="background: #f0f0f0; cursor: not-allowed;">C39b078e1e06576822619457882f6ff3e</textarea>
+                        <p style="font-size: 12px; color: #28a745; margin-top: 5px; font-weight: 600;">
+                            ✅ Group ID ใส่เรียบร้อยแล้ว (ค่าคงที่)
+                        </p>
                     </div>
 
                     <div class="form-group">
@@ -732,7 +738,7 @@
                     <div class="form-group">
                         <label>📝 ข้อความแจ้งเตือน</label>
                         <textarea id="notification-message" placeholder="กรุณา Update ข้อมูลในระบบ" 
-                                  style="min-height: 80px;">🔔 reminder: กรุณาตรวจสอบข้อมูลใน dashboard และ update ข้อมูลในงานของท่านในระบบติดตามผลงานฝ่ายการพยาบาล
+                                  style="min-height: 100px;">🔔 reminder: กรุณาตรวจสอบข้อมูลใน dashboard และ update ข้อมูลในงานของท่านในระบบติดตามผลงานฝ่ายการพยาบาล
 
 🔗 เข้าสู่ระบบ: https://informaticnr28-beep.github.io/-portal-nursing/
 
