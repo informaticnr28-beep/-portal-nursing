@@ -678,7 +678,7 @@
 
                     <div class="form-group">
                         <label>🔗 Google Apps Script Deployment URL</label>
-                        <input type="text" id="gas-url" placeholder="https://script.google.com/macros/s/[ID]/usercontent" value="https://script.google.com/macros/s/AKfycbzzsbka7iN3Cy1Y3ggWheXqt2v9xiuqDh59bWCCuXPlHNXX6gIobLZF6Tcwy10Fv0_j/exec" readonly style="background: #f0f0f0; cursor: not-allowed;">
+                        <input type="text" id="gas-url" placeholder="https://script.google.com/macros/s/[ID]/usercontent" value="https://script.google.com/macros/s/AKfycbwoJZoEw_WXz8JlTzxfi9vR9Ifs471mRRLpY5qxkKO7kxnDkadSn0nyB1C3OBERnhywvA/exec" readonly style="background: #f0f0f0; cursor: not-allowed;">
                         <p style="font-size: 12px; color: #28a745; margin-top: 5px; font-weight: 600;">
                             ✅ URL ใส่เรียบร้อยแล้ว (ค่าคงที่)
                         </p>
@@ -740,7 +740,7 @@
                         <textarea id="notification-message" placeholder="กรุณา Update ข้อมูลในระบบ"
                                   style="min-height: 100px;">🔔 reminder: กรุณาตรวจสอบข้อมูลใน dashboard และ update ข้อมูลในงานของท่านในระบบติดตามผลงานฝ่ายการพยาบาล
 
-🔗 เข้าสู่ระบบ: https://script.google.com/macros/s/AKfycbzzsbka7iN3Cy1Y3ggWheXqt2v9xiuqDh59bWCCuXPlHNXX6gIobLZF6Tcwy10Fv0_j/exec
+🔗 เข้าสู่ระบบ: https://script.google.com/macros/s/AKfycbwoJZoEw_WXz8JlTzxfi9vR9Ifs471mRRLpY5qxkKO7kxnDkadSn0nyB1C3OBERnhywvA/exec
 
 ขอบคุณค่ะ 🙏</textarea>
                     </div>
@@ -1010,12 +1010,12 @@
         }
 
         // Hardcode GAS URL
-        const GAS_DEPLOYMENT_URL = "https://script.google.com/macros/s/AKfycbzzsbka7iN3Cy1Y3ggWheXqt2v9xiuqDh59bWCCuXPlHNXX6gIobLZF6Tcwy10Fv0_j/exec";
+        const GAS_DEPLOYMENT_URL = "https://script.google.com/macros/s/AKfycbwoJZoEw_WXz8JlTzxfi9vR9Ifs471mRRLpY5qxkKO7kxnDkadSn0nyB1C3OBERnhywvA/exec";
         
         // ฟังก์ชันทดสอบส่งแจ้งเตือน (ใช้ Google Apps Script)
         async function sendTestNotification() {
             const userId = document.getElementById('line-user-id').value;
-            const testMessage = "🧪 [TEST] ระบบแจ้งเตือนทำงานได้ปกติ ✅\n\n🔗 เข้าสู่ระบบ: https://script.google.com/macros/s/AKfycbzzsbka7iN3Cy1Y3ggWheXqt2v9xiuqDh59bWCCuXPlHNXX6gIobLZF6Tcwy10Fv0_j/exec";
+            const testMessage = "🧪 [TEST] ระบบแจ้งเตือนทำงานได้ปกติ ✅\n\n🔗 เข้าสู่ระบบ: https://script.google.com/macros/s/AKfycbwoJZoEw_WXz8JlTzxfi9vR9Ifs471mRRLpY5qxkKO7kxnDkadSn0nyB1C3OBERnhywvA/exec";
 
             if (!userId) {
                 showTestResult('❌ ข้อผิดพลาด: ไม่มี Group ID', false);
