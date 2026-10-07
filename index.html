@@ -574,7 +574,7 @@
                     </p>
                     <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 12px; text-align: center;">
                         <p style="color: white; font-size: 16px; margin-bottom: 20px;">คลิกปุ่มด้านล่างเพื่อเข้าสู่ระบบติดตาม</p>
-                        <button class="btn btn-primary" onclick="window.open('https://script.google.com/macros/s/AKfycbzzsbka7iN3Cy1Y3ggWheXqt2v9xiuqDh59bWCCuXPlHNXX6gIobLZF6Tcwy10Fv0_j/exec', '_blank')" 
+                        <button class="btn btn-primary" onclick="window.open('https://script.google.com/macros/s/AKfycbzSK3fYOeBpZ0C71jpR69hrpB0hkgiuDypzevBMuODc4FO5B06yutZ72qmrGwiGY4fU_w/exec', '_blank')" 
                                 style="padding: 15px 40px; font-size: 16px; background: white; color: #667eea; font-weight: bold;">
                             ➤ เข้าสู่ระบบติดตาม
                         </button>
@@ -678,7 +678,7 @@
 
                     <div class="form-group">
                         <label>🔗 Google Apps Script Deployment URL</label>
-                        <input type="text" id="gas-url" placeholder="https://script.google.com/macros/s/[ID]/usercontent" value="https://script.google.com/macros/s/AKfycbz-n9n73dUxPgd0FFab-123PtA6b7memd3HI6GQA4grgj_p8HifuGwi5R_zBVUXqoS6/exec" readonly style="background: #f0f0f0; cursor: not-allowed;">
+                        <input type="text" id="gas-url" placeholder="https://script.google.com/macros/s/[ID]/usercontent" value="https://script.google.com/macros/s/AKfycbzzsbka7iN3Cy1Y3ggWheXqt2v9xiuqDh59bWCCuXPlHNXX6gIobLZF6Tcwy10Fv0_j/exec" readonly style="background: #f0f0f0; cursor: not-allowed;">
                         <p style="font-size: 12px; color: #28a745; margin-top: 5px; font-weight: 600;">
                             ✅ URL ใส่เรียบร้อยแล้ว (ค่าคงที่)
                         </p>
@@ -737,10 +737,10 @@
 
                     <div class="form-group">
                         <label>📝 ข้อความแจ้งเตือน</label>
-                        <textarea id="notification-message" placeholder="กรุณา Update ข้อมูลในระบบ" 
+                        <textarea id="notification-message" placeholder="กรุณา Update ข้อมูลในระบบ"
                                   style="min-height: 100px;">🔔 reminder: กรุณาตรวจสอบข้อมูลใน dashboard และ update ข้อมูลในงานของท่านในระบบติดตามผลงานฝ่ายการพยาบาล
 
-🔗 เข้าสู่ระบบ: https://informaticnr28-beep.github.io/-portal-nursing/
+🔗 เข้าสู่ระบบ: https://script.google.com/macros/s/AKfycbzzsbka7iN3Cy1Y3ggWheXqt2v9xiuqDh59bWCCuXPlHNXX6gIobLZF6Tcwy10Fv0_j/exec
 
 ขอบคุณค่ะ 🙏</textarea>
                     </div>
@@ -1010,12 +1010,12 @@
         }
 
         // Hardcode GAS URL
-        const GAS_DEPLOYMENT_URL = "https://script.google.com/macros/s/AKfycbz-n9n73dUxPgd0FFab-123PtA6b7memd3HI6GQA4grgj_p8HifuGwi5R_zBVUXqoS6/exec";
+        const GAS_DEPLOYMENT_URL = "https://script.google.com/macros/s/AKfycbzzsbka7iN3Cy1Y3ggWheXqt2v9xiuqDh59bWCCuXPlHNXX6gIobLZF6Tcwy10Fv0_j/exec";
         
         // ฟังก์ชันทดสอบส่งแจ้งเตือน (ใช้ Google Apps Script)
         async function sendTestNotification() {
             const userId = document.getElementById('line-user-id').value;
-            const testMessage = "🧪 [TEST] ระบบแจ้งเตือนทำงานได้ปกติ ✅\n\n🔗 เข้าสู่ระบบ: https://informaticnr28-beep.github.io/-portal-nursing/";
+            const testMessage = "🧪 [TEST] ระบบแจ้งเตือนทำงานได้ปกติ ✅\n\n🔗 เข้าสู่ระบบ: https://script.google.com/macros/s/AKfycbzzsbka7iN3Cy1Y3ggWheXqt2v9xiuqDh59bWCCuXPlHNXX6gIobLZF6Tcwy10Fv0_j/exec";
 
             if (!userId) {
                 showTestResult('❌ ข้อผิดพลาด: ไม่มี Group ID', false);
